@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('donaturs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("auth_id");
-            $table->enum("status", ["active", "inactive"]);
+            $table->foreignId('auth_id')->constrained('auths')->onDelete('cascade');
+           $table->enum("status", ["active", "inactive"]);
             $table->bigInteger("total_price");
             $table->timestamps();
-        });
+            $table->softDeletes();
+
+   });
     }
 
     /**
